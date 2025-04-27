@@ -50,9 +50,9 @@ Route::middleware('auth:api')->prefix('polls')
         Route::delete('/{id}', 'destroy');
     });
 
-Route::middleware('auth:api')->prefix('polls')
+Route::prefix('polls')
     ->controller(VoteController::class)
     ->group(function () {
-        Route::post('/{id}/vote', 'store');
-        Route::get('/{id}/results', 'getResults');
+        Route::post('/{id}/vote', 'store')->middleware('poll.voting');
+        Route::get('/{id}/results', 'getResults')->middleware('auth:api');
     });

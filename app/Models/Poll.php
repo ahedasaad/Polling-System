@@ -13,12 +13,14 @@ class Poll extends Model
         'user_id',
         'title',
         'description',
+        'anoymous_voting',
         'status',
         'expires_at',
     ];
 
     protected $casts = [
         'expires_at' => 'datetime',
+        'anoymous_voting' => 'boolean',
     ];
 
     public function user()

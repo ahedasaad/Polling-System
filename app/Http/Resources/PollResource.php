@@ -20,6 +20,7 @@ class PollResource extends JsonResource
             'description' => $this->description,
             'status' => $this->status,
             'expires_at' => $this->expires_at->format('Y-m-d H:i:s'),
+            'anoymous_voting' => $this->anoymous_voting,
             'created_by' => [
                 'id' => $this->user->id,
                 'name' => $this->user->name,

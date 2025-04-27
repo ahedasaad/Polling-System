@@ -42,7 +42,8 @@ class PollController extends Controller
                 'title' => 'required|string|max:255',
                 'description' => 'nullable|string',
                 'expires_at' => 'required|date|after_or_equal:today',
-                'options' => 'required|array',
+                'anoymous_voting' => 'boolean',
+                'options' => 'required|array|min:2',
                 'options.*.option_text' => 'nullable|string|max:255',
             ]);
 
@@ -58,6 +59,7 @@ class PollController extends Controller
                 'title' => $request->title,
                 'description' => $request->description,
                 'expires_at' => $expiresAt,
+                'anoymous_voting' => $request->anoymous_voting,
                 'status' => 'ACTIVE',
             ]);
 
@@ -96,7 +98,8 @@ class PollController extends Controller
                 'title' => 'string|max:255',
                 'description' => 'nullable|string',
                 'expires_at' => 'date|after:now',
-                'options' => 'nullable|array',
+                'anoymous_voting' => $request->anoymous_voting,
+                'options' => 'nullable|array|min:2',
                 'options.*.id' => 'nullable|exists:poll_options,id',
                 'options.*.option_text' => 'nullable|string|max:255',
             ]);
@@ -105,6 +108,7 @@ class PollController extends Controller
                 'title' => $request->title ?? $poll->title,
                 'description' => $request->description ?? $poll->description,
                 'expires_at' => $request->expires_at ?? $poll->expires_at,
+                'anoymous_voting' => $request->anoymous_voting ?? $poll->anoymous_voting,
             ]));
 
             if ($request->has('options')) {

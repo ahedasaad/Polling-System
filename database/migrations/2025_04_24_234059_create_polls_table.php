@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade'); // admin who created it
             $table->string('title');
+            $table->boolean('anoymous_voting')->default(false);
             $table->text('description')->nullable();
             $table->enum('status', ['ACTIVE', 'EXPIRED'])->default('ACTIVE');
             $table->timestamp('expires_at');
